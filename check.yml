@@ -1,0 +1,11 @@
+---
+ - hosts: all
+   become: yes
+   tasks:
+    - name: Check Java
+      command: java -version
+      register: java_result
+      ignore_errors: True
+    - name: Install Java
+      import_tasks: install.yml
+      when: java_result.rc != 0

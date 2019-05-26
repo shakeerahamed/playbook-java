@@ -1,0 +1,33 @@
+---
+ - set_fact:
+    src_folder: /opt/jdk-8u131-linux-x64.tar.gz
+    java_name: /opt/jdk1.8.0_131
+    java_archive: /opt/jdk-8u131-linux-x64.tar.gz
+
+ - name: Copy Java
+   copy:
+    src: "{{src_folder}}"
+    dest: /opt
+
+ - name: Unpack archive
+   unarchive:
+    src: "{{java_archive}}"
+    dest: /opt
+    remote_src: yes
+   
+ - name: Fix ownership
+   file: 
+    state: directory
+    path: "{{java_name}}"
+    owner: root
+    group: root
+    recurse: yes
+
+ - name: Make Java available for system
+   command: 'alternatives --install "/usr/bin/java" "java" "{{java_name}}/bin/java" 2000'
+ 
+ - name: Clean up
+   file:
+    state: absent
+    path: "{{java_archive}}"
+   
