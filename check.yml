@@ -1,5 +1,5 @@
 ---
- - hosts: all
+ - hosts: 10.10.10.22
    become: yes
    tasks:
     - name: Check Java

@@ -3,7 +3,7 @@
     src_folder: /opt/jdk-8u131-linux-x64.tar.gz
     java_name: /opt/jdk1.8.0_131
     java_archive: /opt/jdk-8u131-linux-x64.tar.gz
-    java_env_file: /etc/profile.d/java.sh
+    java_env_file: /opt/profile.d/java.sh
 
  - name: Copy Java
    copy:
@@ -18,7 +18,7 @@
   
  - name: create java.sh file
    file:
-    path: "{{java_env_file}}"
+    path: /opt/profile.d/java.sh
     state: touch
     mode: '0755'
 
